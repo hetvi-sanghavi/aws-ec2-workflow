@@ -15,8 +15,8 @@ apt-get update
 sudo apt-get -y install mysql-server
 sudo systemctl start mysql
 sudo apt install awscli -y
-mkdir -p devteam
-aws s3 cp ${var.bucket_url} /devteam
+mkdir -p ~/devteam
+aws s3 sync ${var.bucket_url} ~/devteam
 EOF
   tags = {
     Name = "${var.instance_name}${random_string.ec2_instance_name.result}"

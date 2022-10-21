@@ -8,7 +8,7 @@ variable "iam_instance_profile" {
   default = "CodeDeployDemo-EC2-Instance-Profile"
 }
 variable "bucket_url" {
-  default = "s3://awss3clonebucket/hetvi/"
+  default = "s3://awss3clonebucket/"
 }
 variable "security_groups" {
   type    = list(string)
