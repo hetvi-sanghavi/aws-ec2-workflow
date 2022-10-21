@@ -47,27 +47,29 @@ name: 'Terraform'
 on:
   workflow_dispatch:
    inputs:
-     logLevel:
-       description: 'Log level'
-       required: true
-       default: 'warning'
-       type: choice
-       options:
-         - info
-         - warning
-         - debug
-     print_tags:
-       description: 'True to print to STDOUT'
-       required: true
-       type: boolean
-     tags:
-       description: 'Test scenario tags'
+     build_id:
        required: true
        type: string
-     environment:
-       description: 'Environment to run tests against'
-       type: environment
+     ami:
+       description: 'Pass AMI ID'
+       type: string
        required: true
+       default: "ami-0fd8802f94ed1c969"
+     subnet_id:
+       description: 'Pass Subnet ID'
+       type: string
+       required: true
+       default: "subnet-0999e7faa22e4f1df"
+     instance_type:
+       description: 'Pass Instance Type'
+       type: string
+       required: true
+       default: "t2.micro"
+     key_name:
+       description: 'Pass AMI ID'
+       type: string
+       required: true
+       default: "test"
 
 permissions:
   contents: read
@@ -111,7 +113,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var-file terraform.tfvras -input=false -out tfplan
+      run: terraform plan -var ami=${{ inputs.ami }} -var instance_type=${{ inputs.instance_type }} -var subnet_id=${{ subnet_id }} -var key_name=${{ key_name }} -input=false -out tfplan
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
