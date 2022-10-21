@@ -5,3 +5,6 @@ variable "key_name" {}
 variable "instance_name" {}
 variable "iam_instance_profile" {}
 variable "bucket_url" {}
+variable "security_groups" {
+  type = list(string)
+}

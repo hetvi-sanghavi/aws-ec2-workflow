@@ -10,6 +10,10 @@ variable "iam_instance_profile" {
 variable "bucket_url" {
   default = "s3://awss3clonebucket/hetvi/"
 }
+variable "security_groups" {
+  type    = list(string)
+  default = ["launch-wizard-1"]
+}
 variable "key_name" {}
 variable "instance_name" {}
 variable "instance_type" {}

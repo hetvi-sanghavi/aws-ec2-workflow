@@ -7,4 +7,5 @@ module "ec2" {
   instance_name        = var.instance_name
   iam_instance_profile = var.iam_instance_profile
   bucket_url           = var.bucket_url
+  security_groups      = var.security_groups
 }
