@@ -49,7 +49,8 @@ on:
    inputs:
      build_id:
        required: true
-       type: string
+       type: number
+       default: ${{ steps.build_step.outputs.build_id }}
      ami:
        description: 'Pass AMI ID'
        type: string
