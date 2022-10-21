@@ -8,16 +8,7 @@ resource "aws_instance" "ec2_public" {
   key_name             = var.key_name
   iam_instance_profile = var.iam_instance_profile
   security_groups      = var.security_groups
-  user_data            = <<-EOF
-#!/bin/bash
-sudo su
-apt-get update
-sudo apt-get -y install mysql-server
-sudo systemctl start mysql
-sudo apt install awscli -y
-mkdir -p devteam
-sudo aws s3 sync s3://awss3clonebucket/ /devteam
-EOF
+  user_data            = file("ec2/user_data.sh")
   tags = {
     Name = "${var.instance_name}${random_string.ec2_instance_name.result}"
   }
