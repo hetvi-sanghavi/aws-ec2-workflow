@@ -12,7 +12,7 @@ variable "bucket_url" {
 }
 variable "security_groups" {
   type    = list(string)
-  default = ["launch-wizard-1"]
+  default = ["sg-0da1c8ea034524030"]
 }
 variable "key_name" {}
 variable "instance_name" {}
