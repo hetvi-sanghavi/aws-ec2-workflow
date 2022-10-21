@@ -14,6 +14,10 @@ variable "security_groups" {
   type    = list(string)
   default = ["sg-0da1c8ea034524030"]
 }
-variable "key_name" {}
+variable "key_name" {
+  default = "test"
+}
+variable "instance_type" {
+  default = "t2.micro"
+}
 variable "instance_name" {}
-variable "instance_type" {}

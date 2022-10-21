@@ -7,16 +7,6 @@ on:
        description: 'Pass your instance name'
        type: string
        required: true
-     instance_type:
-       description: 'Pass Instance Type'
-       type: string
-       required: true
-       default: "t2.micro"
-     key_name:
-       description: 'Pass Key Name'
-       type: string
-       required: true
-       default: "test"
 
 permissions:
   contents: read
@@ -49,14 +39,15 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+      #Terraform Workspace
+    - name: Terraform Workspace
+      run: terraform workspace select ${{ inputs.instance_name }}
+
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var instance_type=${{ inputs.instance_type }}  -var key_name=${{ inputs.key_name }} -var instance_name=${{ inputs.instance_name }} -input=false -out tfplan
+      run: terraform plan -destroy -var instance_name=${{ inputs.instance_name }} -input=false -out tfplan
 
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
+    - name: Terraform Destroy
       run: terraform apply "tfplan"
