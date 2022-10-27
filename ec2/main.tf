@@ -1,5 +1,8 @@
-resource "random_string" "ec2_instance_name" {
-  length = 3
+data "template_file" "user_data" {
+  template = file("${path.module}/user_data.tpl")
+  vars = {
+    bucket_url = var.bucket_url
+  }
 }
 resource "aws_instance" "ec2_public" {
   ami                  = var.ami
@@ -8,8 +11,6 @@ resource "aws_instance" "ec2_public" {
   key_name             = var.key_name
   iam_instance_profile = var.iam_instance_profile
   security_groups      = var.security_groups
-  user_data            = file("ec2/user_data.sh")
-  tags = {
-    Name = "${var.instance_name}${random_string.ec2_instance_name.result}"
-  }
+  user_data            = data.template_file.user_data.rendered
+  tags                 = var.tags
 }

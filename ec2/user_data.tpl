@@ -5,4 +5,4 @@ sudo apt-get -y install mysql-server
 sudo systemctl start mysql
 sudo apt install awscli -y
 mkdir -p devteam
-sudo aws s3 sync s3://awss3clonebucket/ /devteam
+sudo aws s3 sync s3://${bucket_url}/ /devteam

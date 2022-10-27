@@ -3,8 +3,12 @@ name: 'Terraform Create'
 on:
   workflow_dispatch:
    inputs:
-     instance_name:
-       description: 'Pass your instance name'
+     user_name:
+       description: 'Pass your user name'
+       type: string
+       required: true
+     ticket_number:
+       description: 'Pass your ticket number'
        type: string
        required: true
      instance_type:
@@ -51,7 +55,7 @@ jobs:
 
       #Terraform Workspace
     - name: Terraform Workspace
-      run: terraform workspace new ${{ inputs.instance_name }}
+      run: terraform workspace new ${{ inputs.ticket_number }} || terraform workspace select ${{ inputs.ticket_number }}
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
@@ -59,7 +63,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var instance_type=${{ inputs.instance_type }}  -var key_name=${{ inputs.key_name }} -var instance_name=${{ inputs.instance_name }} -input=false -out tfplan
+      run: terraform plan -var instance_type=${{ inputs.instance_type }}  -var key_name=${{ inputs.key_name }} -var user_name=${{ inputs.user_name }} -var ticket_number=${{ inputs.ticket_number }} -input=false -out tfplan
 
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply

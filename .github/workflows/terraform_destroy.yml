@@ -3,11 +3,14 @@ name: 'Terraform Destroy'
 on:
   workflow_dispatch:
    inputs:
-     instance_name:
+     user_name:
        description: 'Pass your instance name'
        type: string
        required: true
-
+     ticket_number:
+       description: 'Pass your ticket number'
+       type: string
+       required: true
 permissions:
   contents: read
 
@@ -41,8 +44,7 @@ jobs:
 
       #Terraform Workspace
     - name: Terraform Workspace
-      run: terraform workspace select ${{ inputs.instance_name }}
-
+      run: terraform workspace new ${{ inputs.ticket_number }} || terraform workspace select ${{ inputs.ticket_number }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
