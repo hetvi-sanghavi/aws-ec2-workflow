@@ -23,7 +23,7 @@ variable "key_name" {
 variable "instance_type" {
   default = "t2.micro"
 }
-variable "ebs_volume_availability_zone" {
+variable "availability_zone" {
   default = "eu-west-1a"
 }
 variable "ebs_volume_size" {

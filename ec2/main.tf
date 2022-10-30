@@ -12,11 +12,12 @@ resource "aws_instance" "ec2_public" {
   iam_instance_profile = var.iam_instance_profile
   security_groups      = var.security_groups
   user_data            = data.template_file.user_data.rendered
+  availability_zone    = var.availability_zone
   tags                 = var.tags
 }
 
 resource "aws_ebs_volume" "ebs_volume" {
-  availability_zone = var.ebs_volume_availability_zone
+  availability_zone = var.availability_zone
   size              = var.ebs_volume_size
 }
 
