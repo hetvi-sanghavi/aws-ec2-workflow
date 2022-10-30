@@ -3,10 +3,6 @@ name: 'Terraform Destroy'
 on:
   workflow_dispatch:
    inputs:
-     user_name:
-       description: 'Pass your instance name'
-       type: string
-       required: true
      ticket_number:
        description: 'Pass your ticket number'
        type: string
