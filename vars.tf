@@ -34,5 +34,7 @@ variable "ebs_att_device_name" {
   default     = "/dev/sdh"
   description = "The device name to expose to the instance (for example, /dev/sdh or xvdh)"
 }
-variable "user_name" {}
+variable "user_name" {
+  default = "user_name"
+}
 variable "ticket_number" {}
