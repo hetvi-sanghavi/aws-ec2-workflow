@@ -57,9 +57,9 @@ jobs:
     - name: Terraform Workspace
       run: terraform workspace new ${{ inputs.ticket_number }} || terraform workspace select ${{ inputs.ticket_number }}
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+#    # Checks that all Terraform configuration files adhere to a canonical format
+#    - name: Terraform Format
+#      run: terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
