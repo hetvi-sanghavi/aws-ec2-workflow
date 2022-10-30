@@ -40,7 +40,7 @@ jobs:
 
       #Terraform Workspace
     - name: Terraform Workspace
-      run: terraform workspace new ${{ inputs.ticket_number }} || terraform workspace select ${{ inputs.ticket_number }}
+      run: terraform workspace select ${{ inputs.ticket_number }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
