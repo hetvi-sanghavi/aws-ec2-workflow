@@ -14,3 +14,14 @@ resource "aws_instance" "ec2_public" {
   user_data            = data.template_file.user_data.rendered
   tags                 = var.tags
 }
+
+resource "aws_ebs_volume" "ebs_volume" {
+  availability_zone = var.ebs_volume_availability_zone
+  size              = var.ebs_volume_size
+}
+
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = var.ebs_att_device_name
+  volume_id   = aws_ebs_volume.ebs_volume.id
+  instance_id = aws_instance.ec2_public.id
+}

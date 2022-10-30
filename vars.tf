@@ -1,3 +1,6 @@
+variable "region" {
+  default = "eu-west-1"
+}
 variable "ami" {
   default = "ami-0fd8802f94ed1c969"
 }
@@ -19,6 +22,17 @@ variable "key_name" {
 }
 variable "instance_type" {
   default = "t2.micro"
+}
+variable "ebs_volume_availability_zone" {
+  default = "eu-west-1a"
+}
+variable "ebs_volume_size" {
+  default     = 1
+  description = "The size of the drive in GiBs."
+}
+variable "ebs_att_device_name" {
+  default     = "/dev/sdh"
+  description = "The device name to expose to the instance (for example, /dev/sdh or xvdh)"
 }
 variable "user_name" {}
 variable "ticket_number" {}
