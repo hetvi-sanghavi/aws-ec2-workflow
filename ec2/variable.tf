@@ -11,5 +11,5 @@ variable "security_groups" {
   type = list(string)
 }
 variable "tags" {
-  type = list(string)
+  type = map(string)
 }
