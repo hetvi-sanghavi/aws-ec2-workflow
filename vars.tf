@@ -24,7 +24,8 @@ variable "instance_type" {
   default = "t2.micro"
 }
 variable "availability_zone" {
-  default = "eu-west-1a"
+  default = "eu-west-1c"
+  description = "Pass the subnet availability zone"
 }
 variable "ebs_volume_size" {
   default     = 1
