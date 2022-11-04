@@ -38,4 +38,7 @@ variable "ebs_att_device_name" {
 variable "user_name" {
   default = "user_name"
 }
+variable "jira_url" {
+  default = "https://hetvi.atlassian.net/"
+}
 variable "ticket_number" {}

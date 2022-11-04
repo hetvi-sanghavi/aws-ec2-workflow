@@ -13,6 +13,6 @@ module "ec2" {
   tags = {
     Name          = var.user_name
     user_name     = var.user_name
-    ticket_number = var.ticket_number
+    jira_ticket   = "${var.jira_url}${var.ticket_number}"
   }
 }
