@@ -38,8 +38,7 @@ sudo systemctl start mysql.service
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 mkdir -p /home/ubuntu/webteamdb
-timestamp=$(date '+%Y-%m-%d')
-sudo aws s3 cp s3://webteam-files/Prod-${var.env}-Mysqldump/${var.env}-Website-RDS-Backup-${timestamp}.sql.gz /home/ubuntu/webteamdb/${var.env}-Website-RDS-Backup-${timestamp}.sql.gz
+sudo aws s3 cp s3://webteam-files/Prod-${var.env}-Mysqldump/${var.env}-Website-RDS-Backup-${formatdate("YYYY-MM-DD", timestamp())}.sql.gz /home/ubuntu/webteamdb/${var.env}-Website-RDS-Backup-${formatdate("YYYY-MM-DD", timestamp())}.sql.gz
 --//--
 EOF
   availability_zone = var.availability_zone
