@@ -10,9 +10,10 @@ module "ec2" {
   ebs_att_device_name  = var.ebs_att_device_name
   availability_zone    = var.availability_zone
   ebs_volume_size      = var.ebs_volume_size
+  env                  = var.env
   tags = {
-    Name          = var.user_name
-    user_name     = var.user_name
-    jira_ticket   = "${var.jira_url}${var.ticket_number}"
+    Name        = var.user_name
+    user_name   = var.user_name
+    jira_ticket = "${var.jira_url}${var.ticket_number}"
   }
 }

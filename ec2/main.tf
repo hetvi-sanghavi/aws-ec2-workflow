@@ -11,8 +11,8 @@ resource "aws_instance" "ec2_public" {
   key_name             = var.key_name
   iam_instance_profile = var.iam_instance_profile
   security_groups      = var.security_groups
-#  user_data            = data.template_file.user_data.rendered
-  user_data       = <<-EOF
+  #  user_data            = data.template_file.user_data.rendered
+  user_data         = <<-EOF
 Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
 
@@ -42,8 +42,8 @@ timestamp=$(date '+%Y-%m-%d')
 sudo aws s3 cp s3://webteam-files/Prod-${var.env}-Mysqldump/${var.env}-Website-RDS-Backup-${timestamp}.sql.gz /home/ubuntu/webteamdb/${var.env}-Website-RDS-Backup-${timestamp}.sql.gz
 --//--
 EOF
-  availability_zone    = var.availability_zone
-  tags                 = var.tags
+  availability_zone = var.availability_zone
+  tags              = var.tags
 }
 
 resource "aws_ebs_volume" "ebs_volume" {
