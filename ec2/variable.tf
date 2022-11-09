@@ -13,3 +13,4 @@ variable "security_groups" {
 variable "tags" {
   type = map(string)
 }
+variable "env" {}

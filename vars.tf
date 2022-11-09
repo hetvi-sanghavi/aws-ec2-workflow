@@ -42,3 +42,6 @@ variable "jira_url" {
   default = "https://hetvi.atlassian.net/"
 }
 variable "ticket_number" {}
+variable "env" {
+  default = "IA"
+}
