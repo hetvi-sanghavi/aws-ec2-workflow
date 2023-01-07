@@ -13,10 +13,6 @@ variable "iam_instance_profile" {
 variable "bucket_url" {
   default = "s3://awss3clonebucket/"
 }
-variable "security_groups" {
-  type    = list(string)
-  default = ["sg-0da1c8ea034524030"]
-}
 variable "key_name" {
   default = "test"
 }
@@ -44,4 +40,7 @@ variable "jira_url" {
 variable "ticket_number" {}
 variable "env" {
   default = "IA"
+}
+variable "vpc_id" {
+  default = "YOUR_VPC_ID"
 }

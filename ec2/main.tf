@@ -4,14 +4,38 @@ data "template_file" "user_data" {
     bucket_url = var.bucket_url
   }
 }
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = var.vpc_id
 
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = "0.0.0.0/0"
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
 resource "aws_instance" "ec2_public" {
   ami                  = var.ami
   instance_type        = var.instance_type
   subnet_id            = var.subnet_id
   key_name             = var.key_name
   iam_instance_profile = var.iam_instance_profile
-  security_groups      = var.security_groups
+  security_groups      = aws_security_group.allow_tls.name
   #  user_data            = data.template_file.user_data.rendered
   user_data         = <<-EOF
 Content-Type: multipart/mixed; boundary="//"
