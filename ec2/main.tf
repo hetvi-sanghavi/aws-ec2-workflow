@@ -4,7 +4,14 @@ data "template_file" "user_data" {
     bucket_url = var.bucket_url
   }
 }
-
+resource "aws_security_group_rule" "port_80" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = var.security_groups
+}
 resource "aws_instance" "ec2_public" {
   ami                  = var.ami
   instance_type        = var.instance_type
