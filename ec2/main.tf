@@ -5,12 +5,13 @@ data "template_file" "user_data" {
   }
 }
 resource "aws_security_group_rule" "port_80" {
+  count             = length(var.security_groups)
   type              = "ingress"
   from_port         = 80
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = var.security_groups
+  security_group_id = var.security_groups[count.index]
 }
 resource "aws_instance" "ec2_public" {
   ami                  = var.ami
